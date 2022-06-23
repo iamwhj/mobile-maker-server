@@ -1,9 +1,8 @@
-import mongoose from 'mongoose';
+import { createSchemaModel } from '../common';
 
-const ActivitySchema = new mongoose.Schema({
+const ActivityModel = createSchemaModel('activity', {
     name: String,
-    age: Number,
-});
-const Activity = mongoose.model('activity', ActivitySchema);
+    age: Number
+})
 
-export default Activity;
+export default ActivityModel;

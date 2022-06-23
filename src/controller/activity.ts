@@ -1,4 +1,4 @@
-import { ParameterizedContext, DefaultContext } from "koa";
+import { ParameterizedContext, DefaultContext } from 'koa';
 import ActivityDao from '../dao/activity';
 
 const activityDao = new ActivityDao()

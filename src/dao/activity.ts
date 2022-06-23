@@ -1,4 +1,4 @@
-import Activity from "../models/activity";
+import Activity from '../models/activity';
 
 export default class ActivityDao {
     async insert(data: Object) {
