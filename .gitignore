@@ -1,0 +1,7 @@
+*.lock
+
+temp/*
+
+node_modules
+
+dist
