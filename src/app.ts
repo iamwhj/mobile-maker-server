@@ -4,7 +4,6 @@ import './plugins/dotenv';
 import connectDB from './db';
 import { generateRouter } from './utils/generator';
 import { resolve } from 'path';
-import Router from 'koa-router';
 
 const app = new Koa();
 

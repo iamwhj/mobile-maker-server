@@ -1,3 +1,3 @@
-export const add = (a: number, b: number) => {
-    return a + b
-}
+import { ResponseBody } from '../common/types';
+
+export const returnBody = (body: ResponseBody): ResponseBody => body
