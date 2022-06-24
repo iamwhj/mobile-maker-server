@@ -8,4 +8,6 @@ const router = new Router({
 
 router.post('/', controll.create)
 
+router.get('/', controll.getList)
+
 export default router;

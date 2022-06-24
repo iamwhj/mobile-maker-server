@@ -18,7 +18,7 @@ export const createSchemaModel = (cname: string, field: object) => {
 // 获取自增ID的值
 export const getIncID = async (model: any) => {
     const newUsedId = await model.findOne().sort({_id: -1})
-    const incID = newUsedId.id || 0
+    const incID = newUsedId?.id || 0
     return incID + 1
 }
 

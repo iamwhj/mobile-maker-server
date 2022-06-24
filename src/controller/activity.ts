@@ -25,8 +25,8 @@ export default class ActivityControll {
     }
     async getList(ctx: ParameterizedContext) {
         const v: DefaultContext = ctx.request;
-        const pageNum: number = v.body.pageNum;
-        const pageSize: number = v.body.pageSize;
+        const pageNum = v.body.pageNum;
+        const pageSize = v.body.pageSize;
         const params = { pageNum, pageSize }
         const data = await activityDao.find(params)
         ctx.body = returnBody({
