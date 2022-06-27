@@ -10,4 +10,7 @@ router.post('/', controll.create)
 
 router.get('/', controll.getList)
 
+router.post('/update', controll.update)
+
+
 export default router;

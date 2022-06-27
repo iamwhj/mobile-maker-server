@@ -35,4 +35,15 @@ export default class ActivityControll {
             data
         })
     }
+    async update(ctx: ParameterizedContext) {
+        const v: DefaultContext = ctx.request;
+        const id = v.body.id;
+        const data = v.body.data;
+        const res = await activityDao.update(id, data)
+        ctx.body = returnBody({
+            code: Code.SUCCESS,
+            message: '更新成功',
+            data: res
+        })
+    }
 }

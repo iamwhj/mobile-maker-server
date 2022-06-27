@@ -2,8 +2,9 @@ import Activity from '../models/activity';
 import { processParams } from '../common'
 import { Paging } from '../common/types';
 
+
 export default class ActivityDao {
-    async insert(data: Object) {
+    async insert(data: object) {
         const ripeData = await processParams(data, Activity)
         const activity = new Activity(ripeData)
         const res = await activity.save()
@@ -17,5 +18,9 @@ export default class ActivityDao {
         // 总条数
         let count = await Activity.find().countDocuments()
         return {data: list, count}
+    }
+    async update(id: number, data: Object) {
+        const res = await Activity.updateOne({id}, {...data})
+        return res;
     }
 }
