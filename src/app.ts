@@ -2,7 +2,7 @@ import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import './plugins/dotenv';
 import connectDB from './db';
-import { generateRouter } from './utils/generator';
+import { generateRouter } from './utils/generate';
 import { resolve } from 'path';
 
 const app = new Koa();

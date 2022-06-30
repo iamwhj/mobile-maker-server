@@ -17,3 +17,28 @@ export const generateRouter = (app: Koa, routerPath: string, prefix = ''): void 
     });
     app.use(router.routes()).use(router.allowedMethods());
 };
+
+export const generateHtml = (activity: any) => {
+    const activityData = activity.page;
+    const activityId = activity.id;
+
+    const htmlTemplate = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="app">挂载容器</div>
+
+        <script>
+            var activity = ${activityData}; var activityId = ${activityId};
+        </script>
+    </body>
+    </html>
+    `
+    return htmlTemplate
+}

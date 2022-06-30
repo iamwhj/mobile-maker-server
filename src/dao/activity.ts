@@ -1,6 +1,7 @@
 import Activity from '../models/activity';
 import { processParams } from '../common'
 import { Paging } from '../common/types';
+import { generateHtml } from '../utils/generate';
 
 
 export default class ActivityDao {
@@ -17,10 +18,19 @@ export default class ActivityDao {
         let list = await Activity.find().skip(skip).limit(limt)
         // 总条数
         let count = await Activity.find().countDocuments()
-        return {data: list, count}
+        return { data: list, count }
     }
     async update(id: number, data: Object) {
-        const res = await Activity.updateOne({id}, {...data})
+        const res = await Activity.updateOne({ id }, { ...data })
         return res;
+    }
+    async findOne(id: number) {
+        let res = await Activity.findOne({ id })
+        return res;
+    }
+    async preview(id: number) {
+        const activity = await this.findOne(id)
+        const htmlStr = generateHtml(activity)
+        return htmlStr;
     }
 }

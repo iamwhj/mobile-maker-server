@@ -46,4 +46,10 @@ export default class ActivityControll {
             data: res
         })
     }
+    async preview(ctx: ParameterizedContext) {
+        const v: DefaultContext = ctx.request;
+        const id = v.params.id;
+        const res = await activityDao.preview(Number(id))
+        ctx.body = res;
+    }
 }

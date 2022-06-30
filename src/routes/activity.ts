@@ -1,16 +1,17 @@
 import Router from 'koa-router'
 import ActivityControll from '../controller/activity'
 
-const controll = new ActivityControll()
+const activityCntl = new ActivityControll()
 const router = new Router({
     prefix: '/activity'
 })
 
-router.post('/', controll.create)
+router.post('/', activityCntl.create)
 
-router.get('/', controll.getList)
+router.get('/', activityCntl.getList)
 
-router.post('/update', controll.update)
+router.post('/update', activityCntl.update)
 
+router.get('/preview/:id', activityCntl.preview)
 
 export default router;
