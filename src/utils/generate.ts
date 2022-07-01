@@ -19,26 +19,36 @@ export const generateRouter = (app: Koa, routerPath: string, prefix = ''): void 
 };
 
 export const generateHtml = (activity: any) => {
-    const activityData = activity.page;
+    const activityData = JSON.parse(activity.page);
     const activityId = activity.id;
 
-    const htmlTemplate = `
+    let htmlTemplate = `
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+        <link rel="icon" href="favicon.ico">
+        <title><!-- ACTIVITY_TITLE --></title>
+        <script defer="defer" src="http://127.0.0.1:5500/generate/dist/scripts/chunk-vendors.9d42d826.min.js"></script>
+        <script defer="defer" src="http://127.0.0.1:5500/generate/dist/scripts/app.9d42d826.min.js"></script>
     </head>
     <body>
-        <div id="app">挂载容器</div>
-
-        <script>
-            var activity = ${activityData}; var activityId = ${activityId};
-        </script>
+        <noscript>
+            <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+        </noscript>
+        <div id="app"></div>
+        <!-- built files will be auto injected -->
+        <!-- ACTIVITY_DATA -->
     </body>
     </html>
     `
+    const ACTIVITY_TITLE = activityData.detail.title;
+    const ACTIVITY_DATA = `<script> var activity = ${activity.page}; var activityId = ${activityId} </script>`;
+    htmlTemplate = htmlTemplate
+        .replace('<!-- ACTIVITY_TITLE -->', ACTIVITY_TITLE)
+        .replace('<!-- ACTIVITY_DATA -->', ACTIVITY_DATA);
+
     return htmlTemplate
 }
