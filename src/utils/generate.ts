@@ -1,7 +1,7 @@
 import Koa from 'koa'
 import Router from 'koa-router'
 import { resolve } from 'path'
-import { readdirSync } from 'fs';
+import { readdirSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 
 const router = new Router()
 
@@ -18,7 +18,7 @@ export const generateRouter = (app: Koa, routerPath: string, prefix = ''): void 
     app.use(router.routes()).use(router.allowedMethods());
 };
 
-export const generateHtml = (activity: any) => {
+export const generateHtml = (activity: any, publish?: boolean) => {
     const activityData = JSON.parse(activity.page);
     const activityId = activity.id;
 
@@ -50,5 +50,13 @@ export const generateHtml = (activity: any) => {
         .replace('<!-- ACTIVITY_TITLE -->', ACTIVITY_TITLE)
         .replace('<!-- ACTIVITY_DATA -->', ACTIVITY_DATA);
 
+    if (publish) {
+        const { HTML_FOLDER } = process.env;
+        const folderPath = resolve(__dirname, '../../', HTML_FOLDER as string);
+        if (!existsSync(folderPath)) mkdirSync(folderPath);
+        // 活动发布
+        writeFileSync(resolve(folderPath, `${activityId}.html`), htmlTemplate, 'utf-8')
+    }
+    
     return htmlTemplate
 }

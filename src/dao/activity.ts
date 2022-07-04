@@ -33,4 +33,9 @@ export default class ActivityDao {
         const htmlStr = generateHtml(activity)
         return htmlStr;
     }
+    async publish(id: number) {
+        const activity = await this.findOne(id)
+        const htmlStr = generateHtml(activity, true)
+        return htmlStr;
+    }
 }

@@ -52,4 +52,14 @@ export default class ActivityControll {
         const res = await activityDao.preview(Number(id))
         ctx.body = res;
     }
+    async publish(ctx: ParameterizedContext) {
+        const v: DefaultContext = ctx.request;
+        const id = v.query.id;
+        const res = await activityDao.publish(Number(id))
+        ctx.body = returnBody({
+            code: Code.SUCCESS,
+            message: `ID为${id}的活动发布成功`,
+            data: res
+        })
+    }
 }

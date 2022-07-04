@@ -14,4 +14,6 @@ router.post('/update', activityCntl.update)
 
 router.get('/preview/:id', activityCntl.preview)
 
+router.get('/publish', activityCntl.publish)
+
 export default router;
