@@ -31,8 +31,7 @@ export const generateHtml = (activity: any, publish?: boolean) => {
         <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
         <link rel="icon" href="favicon.ico">
         <title><!-- ACTIVITY_TITLE --></title>
-        <script defer="defer" src="http://127.0.0.1:5500/generate/dist/scripts/chunk-vendors.9d42d826.min.js"></script>
-        <script defer="defer" src="http://127.0.0.1:5500/generate/dist/scripts/app.9d42d826.min.js"></script>
+        <script defer="defer" src="http://127.0.0.1:5500/generate/dist/scripts/chunk-vendors.51b6f71b.min.js"></script><script defer="defer" src="http://127.0.0.1:5500/generate/dist/scripts/app.51b6f71b.min.js"></script>
     </head>
     <body>
         <noscript>

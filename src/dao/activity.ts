@@ -28,6 +28,10 @@ export default class ActivityDao {
         let res = await Activity.findOne({ id })
         return res;
     }
+    async delete(id: number) {
+        let res = await Activity.deleteOne({ id })
+        return res
+    }
     async preview(id: number) {
         const activity = await this.findOne(id)
         const htmlStr = generateHtml(activity)

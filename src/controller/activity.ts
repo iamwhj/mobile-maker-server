@@ -46,6 +46,16 @@ export default class ActivityControll {
             data: res
         })
     }
+    async delete(ctx: ParameterizedContext) {
+        const v: DefaultContext = ctx.request;
+        const id = v.query.id;
+        const res = await activityDao.delete(id)
+        ctx.body = returnBody({
+            code: Code.SUCCESS,
+            message: '删除成功',
+            data: res
+        })
+    }
     async preview(ctx: ParameterizedContext) {
         const v: DefaultContext = ctx.request;
         const id = v.params.id;
