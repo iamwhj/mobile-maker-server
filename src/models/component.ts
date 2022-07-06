@@ -7,6 +7,7 @@ const ComponentModel = createSchemaModel('component', {
     version: String, // 当前版本
     last_version: String, // 上一次成功能版本
     author: String,
+    priority: Number,
     category_id: Number, // 分类 
 })
 
