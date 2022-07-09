@@ -14,8 +14,9 @@ export default class ActivityControll {
         const version = v.body.version;
         const last_version = v.body.last_version;
         const author = v.body.author;
+        const priority = v.body.priority;
         const category_id = v.body.category_id;
-        const params = { path, name, full_name, version, last_version, author, category_id }
+        const params = { path, name, full_name, version, last_version, author, priority, category_id }
         const data = await componentDao.insert(params)
         ctx.body = returnBody({
             code: Code.SUCCESS,
