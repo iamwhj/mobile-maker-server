@@ -10,7 +10,6 @@ export default class ActivityDao {
     }
     async find() {
         const res = await Category.find()
-        // 总条数
         return res;
     }
     async update(id: number, data: Object) {
