@@ -13,3 +13,8 @@ export interface Paging {
     pageNum: number,
     pageSize: number
 }
+
+export interface htmlTemplateTypes {
+    id: number,
+    html: string
+}
