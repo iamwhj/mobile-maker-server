@@ -2,9 +2,10 @@ import Koa from 'koa'
 import Router from 'koa-router'
 import { resolve } from 'path'
 import { readdirSync, writeFileSync, existsSync, mkdirSync } from 'fs';
+import HtmlTemplateDao from '../dao/htmlTemplate';
 
+// 路由自动挂载
 const router = new Router()
-
 export const generateRouter = (app: Koa, routerPath: string, prefix = ''): void => {
     const result = readdirSync(routerPath);
     result.forEach(item => {
@@ -18,31 +19,15 @@ export const generateRouter = (app: Koa, routerPath: string, prefix = ''): void 
     app.use(router.routes()).use(router.allowedMethods());
 };
 
-export const generateHtml = (activity: any, publish?: boolean) => {
+export const generateHtml = async (activity: any, publish?: boolean) => {
     const activityData = JSON.parse(activity.page);
     const activityId = activity.id;
 
-    let htmlTemplate = `
-    <!DOCTYPE html>
-    <html lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-        <link rel="icon" href="favicon.ico">
-        <title><!-- ACTIVITY_TITLE --></title>
-        <script defer="defer" src="http://127.0.0.1:5500/generate/dist/scripts/chunk-vendors.51b6f71b.min.js"></script><script defer="defer" src="http://127.0.0.1:5500/generate/dist/scripts/app.51b6f71b.min.js"></script>
-    </head>
-    <body>
-        <noscript>
-            <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-        </noscript>
-        <div id="app"></div>
-        <!-- built files will be auto injected -->
-        <!-- ACTIVITY_DATA -->
-    </body>
-    </html>
-    `
+    // 获取html模板
+    const htmlTemplateDao = new HtmlTemplateDao();
+    const htmlRecord: any = await htmlTemplateDao.find();
+    let htmlTemplate = htmlRecord[0].html;
+
     const ACTIVITY_TITLE = activityData.detail.title;
     const ACTIVITY_DATA = `<script> var activity = ${activity.page}; var activityId = ${activityId} </script>`;
     htmlTemplate = htmlTemplate
@@ -56,6 +41,6 @@ export const generateHtml = (activity: any, publish?: boolean) => {
         // 活动发布
         writeFileSync(resolve(folderPath, `${activityId}.html`), htmlTemplate, 'utf-8')
     }
-    
+
     return htmlTemplate
 }
